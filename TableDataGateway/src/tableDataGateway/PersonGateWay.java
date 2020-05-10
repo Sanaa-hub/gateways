@@ -17,8 +17,8 @@ public class PersonGateWay {
 		      PreparedStatement findStatement = null;
 		      ResultSet rs = null;
 		      try {
-		         findStatement =  myConn.prepareStatement("Select * from Person whree id = ?");
-		         findStatement.setInt(1,id);
+		         findStatement =  myConn.prepareStatement("Select * from Users where username= ?");
+		         findStatement.setString("Bill_G");
 		         rs = findStatement.executeQuery();
 		         rs.next();
 		         result = PersonGateWay.load(rs);
@@ -41,9 +41,11 @@ public class PersonGateWay {
 	    	String sql = "UPDATE Users SET password=?, fullname=?, email=? WHERE username=?";
 	    	 
 	    	PreparedStatement statement =myConn.prepareStatement(sql);
-	    	statement.setInt(1, 9);
-	    	statement.setString(2, "William Henry Bill Gates");
-	    	statement.setString(3, "my Francklin");
+		statement.setString(1, "secretPassword");
+		statement.setString(2, "Bill Gates");
+	    	statement.setString(3, "billgates@gmail.com"); 
+		
+		
 	
 	    	 
 	    	int rowsUpdated = statement.executeUpdate();
@@ -58,9 +60,10 @@ public class PersonGateWay {
 	    	String sql = "INSERT INTO Users (username, password, fullname, email) VALUES (?, ?, ?, ?)";
 	    	 
 	    	PreparedStatement statement = myConn.prepareStatement(sql);
-	    	statement.setInt(1, 1);
-	    	statement.setString(2, "secretpass");
-	    	statement.setString(3, "Bill Gates");
+	    	statement.setString(1, "Bill_G");
+	    	statement.setString(2, "secretPassword");
+		statement.setString(3, "Bill Gates");
+		statement.setString(4, "billgates@gmail.com");    
 	    	 
 	    	int rowsInserted = statement.executeUpdate();
 	    	if (rowsInserted > 0) {
@@ -71,10 +74,10 @@ public class PersonGateWay {
 	    }
 	    public void delete(int id) throws SQLException{
 
-	    	String sql = "DELETE FROM Users WHERE id=?";
+	    	String sql = "DELETE FROM Users WHERE username=?";
 	    	 
 	    	PreparedStatement statement = myConn.prepareStatement(sql);
-	    	statement.setInt(1, 1);
+	    	statement.setString("Bill_G");
 	    	 
 	    	int rowsDeleted = statement.executeUpdate();
 	    	if (rowsDeleted > 0) {
