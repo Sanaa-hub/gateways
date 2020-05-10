@@ -17,8 +17,8 @@ public class PersonGateWay {
 		      PreparedStatement findStatement = null;
 		      ResultSet rs = null;
 		      try {
-		         findStatement =  myConn.prepareStatement("Select * from Users where username= ?");
-		         findStatement.setString("Bill_G");
+		         findStatement =  myConn.prepareStatement("Select * from Person where id= ?");
+		         findStatement.setInt(1,1);
 		         rs = findStatement.executeQuery();
 		         rs.next();
 		         result = PersonGateWay.load(rs);
@@ -38,50 +38,48 @@ public class PersonGateWay {
 		public void update(int id, String firstName, String lastName) throws SQLException{
 
 	    
-	    	String sql = "UPDATE Users SET password=?, fullname=?, email=? WHERE username=?";
+	    	String sql = "UPDATE Person SET firstName=?, lastname=? WHERE id=?";
 	    	 
 	    	PreparedStatement statement =myConn.prepareStatement(sql);
-		statement.setString(1, "secretPassword");
-		statement.setString(2, "Bill Gates");
-	    	statement.setString(3, "billgates@gmail.com"); 
+		statement.setString(1, "Samia");
+		statement.setString(2, "ahmed");
+	    	statement.setString(3,1); 
 		
 		
 	
 	    	 
 	    	int rowsUpdated = statement.executeUpdate();
 	    	if (rowsUpdated > 0) {
-	    	    System.out.println("An existing user was updated successfully!");
+	    	    System.out.println("An existing person was updated successfully!");
 	    	}
 	    
 	    
 	    }
 	    public void insert(int id, String firstName, String lastName) throws SQLException{
 
-	    	String sql = "INSERT INTO Users (username, password, fullname, email) VALUES (?, ?, ?, ?)";
+	    	String sql = "INSERT INTO Person (firstName, lastname) VALUES (?, ?)";
 	    	 
 	    	PreparedStatement statement = myConn.prepareStatement(sql);
-	    	statement.setString(1, "Bill_G");
-	    	statement.setString(2, "secretPassword");
-		statement.setString(3, "Bill Gates");
-		statement.setString(4, "billgates@gmail.com");    
+		statement.setString(1, "Bill Gates");
+		statement.setString(2, "billgates@gmail.com");    
 	    	 
 	    	int rowsInserted = statement.executeUpdate();
 	    	if (rowsInserted > 0) {
-	    	    System.out.println("A new user was inserted successfully!");
+	    	    System.out.println("A new person was inserted successfully!");
 	    	}
 
 
 	    }
 	    public void delete(int id) throws SQLException{
 
-	    	String sql = "DELETE FROM Users WHERE username=?";
+	    	String sql = "DELETE FROM Person WHERE id=?";
 	    	 
 	    	PreparedStatement statement = myConn.prepareStatement(sql);
-	    	statement.setString("Bill_G");
+	    	statement.setInt(1,1);
 	    	 
 	    	int rowsDeleted = statement.executeUpdate();
 	    	if (rowsDeleted > 0) {
-	    	    System.out.println("A user was deleted successfully!");
+	    	    System.out.println("A person was deleted successfully!");
 	    	}
 
 	    }
